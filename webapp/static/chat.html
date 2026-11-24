@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IT 요청 서비스</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <span class="brand">IT 요청 서비스</span>
+      <div class="who">
+        <span id="who"></span>
+        <button class="btn ghost" id="btn-new" type="button">새 대화</button>
+        <button class="btn ghost" id="btn-logout" type="button">로그아웃</button>
+      </div>
+    </header>
+
+    <div class="main">
+      <section class="chat" aria-label="대화">
+        <div class="messages" id="messages" aria-live="polite"></div>
+        <form class="composer" id="composer">
+          <textarea id="input" rows="1" maxlength="2000" placeholder="IT 문의를 입력하세요. Enter로 전송, Shift+Enter로 줄바꿈" aria-label="메시지 입력"></textarea>
+          <button class="btn" id="send" type="submit">전송</button>
+        </form>
+      </section>
+
+      <aside class="side" aria-label="처리 과정">
+        <div class="panel">
+          <h3>처리 과정 <small id="req-id"></small></h3>
+          <div id="stages"></div>
+        </div>
+        <div class="panel">
+          <h3>프롬프트 캐시 <small>마지막 요청</small></h3>
+          <div class="bar" id="cache-bar" aria-hidden="true"></div>
+          <div class="legend" id="cache-legend"></div>
+          <div class="hint" id="cache-total"></div>
+        </div>
+        <div class="panel">
+          <h3>단기 메모리</h3>
+          <dl class="kv" id="memory"></dl>
+        </div>
+        <div class="panel">
+          <h3>내 자산 <small>누르면 입력창에 넣습니다</small></h3>
+          <div class="assets" id="assets"></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <script src="/static/chat.js"></script>
+</body>
+</html>

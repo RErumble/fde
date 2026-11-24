@@ -1,0 +1,1757 @@
+{
+  "name": "score_eval",
+  "description": "AI 관련 문의의 정보 완성도 종합 점수(0~2) 평가용 문의/정답 점수 100쌍",
+  "guideline": {
+    "metrics": [
+      "정보 충분성",
+      "증상 구체성",
+      "발생 맥락",
+      "환경 정보",
+      "증거 자료",
+      "요청 명확성",
+      "분류 일관성"
+    ],
+    "rule": "7개 지표(각 0~2) 합계가 4 이하이거나 증상 구체성이 0점이면 종합 0점, 합계 5~10이면 1점, 합계 11 이상이고 0점 지표가 없으면 2점(0점 지표가 있으면 1점)",
+    "note": "정답 종합 점수는 scoring.md의 Rubric을 한 사람이 적용해 붙인 지표 점수에서 위 규칙으로 계산했다. 비교는 v1, v2 모두 낼 수 있는 종합 점수로 한다."
+  },
+  "counts": {
+    "gold": {
+      "0": 30,
+      "1": 42,
+      "2": 28
+    },
+    "difficulty": {
+      "easy": 51,
+      "hard": 13,
+      "medium": 36
+    }
+  },
+  "items": [
+    {
+      "id": "S001",
+      "inquiry": "AI가 이상해요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gold_sum": 0,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S002",
+      "inquiry": "챗봇 안 돼요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gold_sum": 1,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S003",
+      "inquiry": "AI 쓰는데 좀 봐주세요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "gold_sum": 1,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S004",
+      "inquiry": "코파일럿이 이상한 답을 해요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gold_sum": 2,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S005",
+      "inquiry": "AI 번역이 별로예요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gold_sum": 1,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S006",
+      "inquiry": "사내 AI 챗봇이 느려요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "gold_sum": 3,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S007",
+      "inquiry": "AI 사용 권한 신청하고 싶어요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        2,
+        1
+      ],
+      "gold_sum": 4,
+      "difficulty": "hard",
+      "tags": [
+        "경계"
+      ]
+    },
+    {
+      "id": "S008",
+      "inquiry": "이미지 생성 AI가 안 돼요 ㅠㅠ",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gold_sum": 1,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S009",
+      "inquiry": "회의록 AI 요약이 엉망이에요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "gold_sum": 2,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S010",
+      "inquiry": "AI 코드 어시스턴트 좀 이상해요. 확인해 주세요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "gold_sum": 2,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S011",
+      "inquiry": "챗봇이 거짓말을 해요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "gold_sum": 2,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S012",
+      "inquiry": "AI 번역 도구 결과가 이상한데 왜 그런가요?",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        1
+      ],
+      "gold_sum": 4,
+      "difficulty": "hard",
+      "tags": [
+        "경계"
+      ]
+    },
+    {
+      "id": "S013",
+      "inquiry": "AI 도구 사용법 알려주세요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "gold_sum": 2,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S014",
+      "inquiry": "요즘 AI가 예전 같지 않아요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gold_sum": 1,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S015",
+      "inquiry": "ChatGPT 접속 안 돼요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "gold_sum": 3,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S016",
+      "inquiry": "사내 AI 챗봇에 로그인이 안 되는데 방법이 있나요?",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        1
+      ],
+      "gold_sum": 4,
+      "difficulty": "hard",
+      "tags": [
+        "경계"
+      ]
+    },
+    {
+      "id": "S017",
+      "inquiry": "AI 문서 작성 도구 써보고 싶은데 어떻게 하면 되나요?",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "gold_sum": 3,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S018",
+      "inquiry": "생성형 AI가 자꾸 틀린 정보를 알려줘서 쓰기 어려워요. 어떻게 해야 하죠?",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "gold_sum": 3,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S019",
+      "inquiry": "AI 쪽에 문제가 있는 것 같습니다.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gold_sum": 0,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S020",
+      "inquiry": "이미지 AI에서 이상한 그림이 나와요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gold_sum": 1,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S021",
+      "inquiry": "회의록 AI가 안 됩니다. 급해요!",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gold_sum": 1,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S022",
+      "inquiry": "어제부터 AI 챗봇이 이상한데요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        1
+      ],
+      "gold_sum": 4,
+      "difficulty": "hard",
+      "tags": [
+        "경계"
+      ]
+    },
+    {
+      "id": "S023",
+      "inquiry": "AI 번역 도구 왜 이렇게 못 해요?",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gold_sum": 1,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S024",
+      "inquiry": "챗봇한테 물어봤는데 답이 엉뚱해요. 확인 좀 부탁드려요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "gold_sum": 3,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S025",
+      "inquiry": "Copilot 안 켜져요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "gold_sum": 3,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S026",
+      "inquiry": "AI 요약 도구가 가끔 안 돼요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "gold_sum": 3,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S027",
+      "inquiry": "사내 LLM 관련해서 문의드립니다.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "gold_sum": 1,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S028",
+      "inquiry": "AI 툴이 계속 에러나요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "gold_sum": 3,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S029",
+      "inquiry": "코파일럿 답변이 느려졌어요. 해결해 주세요.",
+      "gold": 0,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        1
+      ],
+      "gold_sum": 4,
+      "difficulty": "hard",
+      "tags": [
+        "경계"
+      ]
+    },
+    {
+      "id": "S030",
+      "inquiry": "AI 요약 도구 결과가 어제는 괜찮았는데 오늘은 너무 짧아요.",
+      "gold": 0,
+      "gold_metrics": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "gold_sum": 4,
+      "difficulty": "hard",
+      "tags": [
+        "경계"
+      ]
+    },
+    {
+      "id": "S031",
+      "inquiry": "코드 어시스턴트 라이선스가 필요해요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        1,
+        0,
+        1,
+        0,
+        2,
+        1
+      ],
+      "gold_sum": 6,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S032",
+      "inquiry": "사내 AI 번역 도구에서 일본어 계약서를 번역하면 금액 부분이 누락됩니다. 크롬에서 쓰고 있어요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        1,
+        2
+      ],
+      "gold_sum": 7,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S033",
+      "inquiry": "AI 챗봇에 PDF를 올려서 요약시키면 한참 걸리다가 끝나요. 파일은 5MB예요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        1,
+        2
+      ],
+      "gold_sum": 7,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S034",
+      "inquiry": "이미지 생성 AI에서 로고 안의 한글 문구가 깨져서 나옵니다. 영어 문구는 정상이에요. 해결 방법이 있나요?",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        0,
+        1,
+        1,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S035",
+      "inquiry": "Copilot 라이선스를 신청하고 싶어요. 개발팀이고 다음 주부터 쓸 예정입니다.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        1,
+        0,
+        2,
+        2
+      ],
+      "gold_sum": 9,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S036",
+      "inquiry": "사내 AI 검색봇이 최신 규정 문서를 못 찾아요. 어제 업로드한 문서인데 검색 결과에 안 나옵니다.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        1,
+        0,
+        1,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S037",
+      "inquiry": "AI 회의록 도구가 한국어 회의에서 영어 단어를 자꾸 엉뚱한 한글로 적어요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        0,
+        0,
+        0,
+        2
+      ],
+      "gold_sum": 6,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S038",
+      "inquiry": "ChatGPT 엔터프라이즈 로그인할 때 SSO 화면에서 계속 '잘못된 요청' 오류가 납니다.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        1,
+        2,
+        0,
+        2
+      ],
+      "gold_sum": 9,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S039",
+      "inquiry": "코드 어시스턴트가 생성한 코드에 라이선스 문제는 없는지 법무팀 확인을 받고 싶습니다.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        2,
+        1
+      ],
+      "gold_sum": 5,
+      "difficulty": "hard",
+      "tags": [
+        "경계"
+      ]
+    },
+    {
+      "id": "S040",
+      "inquiry": "AI 번역 도구에 영문 이메일을 넣었더니 존댓말이 안 나와요. 입력은 'Please confirm by Monday.'였고 출력은 '월요일까지 확인해.'였어요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        0,
+        2,
+        1,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S041",
+      "inquiry": "사내 AI 챗봇 답변 끝에 출처 링크가 안 붙는데 설정이 따로 있나요?",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S042",
+      "inquiry": "회의록 AI에서 녹음 파일을 올릴 수 있는 최대 용량이 궁금합니다.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S043",
+      "inquiry": "AI 코드 어시스턴트를 JetBrains에서도 쓸 수 있나요? 쓸 수 있다면 설정 방법을 알려주세요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S044",
+      "inquiry": "사내 AI 서비스 API 키를 발급받고 싶습니다. 프로토타입 개발용이고 한 달 정도 쓸 예정이에요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        2,
+        1,
+        0,
+        2,
+        2
+      ],
+      "gold_sum": 10,
+      "difficulty": "hard",
+      "tags": [
+        "경계"
+      ]
+    },
+    {
+      "id": "S045",
+      "inquiry": "이미지 생성 AI로 만든 이미지의 저작권은 회사 소유인가요?",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        0,
+        0,
+        2,
+        2
+      ],
+      "gold_sum": 7,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S046",
+      "inquiry": "AI 번역 도구가 PDF 표 안의 글자는 번역을 안 해요. 일반 문단은 되는데요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        0,
+        1,
+        1,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S047",
+      "inquiry": "AI 챗봇이 어제 저녁부터 'Rate limit exceeded' 메시지만 줍니다.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        1,
+        2,
+        0,
+        2
+      ],
+      "gold_sum": 9,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S048",
+      "inquiry": "생성형 AI 쓰다가 개인정보를 입력해 버렸는데 어떻게 처리해야 하나요? 입력한 건 고객 이름 3건이에요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        0,
+        1,
+        2,
+        1
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S049",
+      "inquiry": "Copilot이 사내 코드베이스를 학습에 쓰나요? 보안 문서를 보고 싶어요.",
+      "gold": 1,
+      "gold_metrics": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        2,
+        1
+      ],
+      "gold_sum": 5,
+      "difficulty": "hard",
+      "tags": [
+        "경계"
+      ]
+    },
+    {
+      "id": "S050",
+      "inquiry": "사내 AI 챗봇에 사진을 올리면 '지원하지 않는 형식' 오류가 나요. 파일은 HEIC예요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        2,
+        1,
+        2
+      ],
+      "gold_sum": 9,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S051",
+      "inquiry": "AI 챗봇이 질문 두세 번 하면 대화 내용을 잊어버려요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        1,
+        0,
+        1,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S052",
+      "inquiry": "Windows 11 노트북에서 AI 데스크톱 앱이 실행하자마자 닫혀요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        1,
+        0,
+        0,
+        2
+      ],
+      "gold_sum": 7,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S053",
+      "inquiry": "AI 챗봇을 업무에 써도 되는지 보안 가이드가 궁금합니다.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        2,
+        1
+      ],
+      "gold_sum": 5,
+      "difficulty": "hard",
+      "tags": [
+        "경계"
+      ]
+    },
+    {
+      "id": "S054",
+      "inquiry": "코드 어시스턴트 자동완성이 파이썬에서는 되는데 자바에서는 안 떠요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        1,
+        0,
+        1,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S055",
+      "inquiry": "AI 번역 도구 단축키가 있나요?",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S056",
+      "inquiry": "AI 회의록 도구 사용 권한이 팀원 한 명만 빠져 있어요. 이름은 김민수입니다.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S057",
+      "inquiry": "사내 AI 챗봇이 오늘 점심 이후로 응답이 거의 안 와요. 두세 번 시도했는데 계속 로딩이에요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        2
+      ],
+      "gold_sum": 10,
+      "difficulty": "hard",
+      "tags": [
+        "경계"
+      ]
+    },
+    {
+      "id": "S058",
+      "inquiry": "AI 코드 어시스턴트 설정에서 모델 선택 메뉴가 사라졌어요. 어제까지는 있었어요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        1,
+        0,
+        1,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S059",
+      "inquiry": "AI 번역 도구에 계정 권한이 없어서 파일 업로드 버튼이 비활성화돼 있어요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        1,
+        1,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S060",
+      "inquiry": "개인 노트북에서 사내 AI 챗봇을 써도 되는지 궁금합니다.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        2,
+        1
+      ],
+      "gold_sum": 7,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S061",
+      "inquiry": "Copilot 구독을 해지하고 싶어요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S062",
+      "inquiry": "AI 이미지 생성 도구에서 생성 횟수 제한이 얼마인지 알려주세요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S063",
+      "inquiry": "사내 AI 챗봇 응답에 개인정보가 섞여 나왔어요. 캡처는 있어요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        2
+      ],
+      "gold_sum": 9,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S064",
+      "inquiry": "회의록 AI가 발언자를 자꾸 잘못 구분해요. 세 명이 번갈아 말할 때 특히 그래요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        1,
+        0,
+        0,
+        2
+      ],
+      "gold_sum": 7,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S065",
+      "inquiry": "AI 챗봇 답변 언어를 영어로 고정하고 싶어요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S066",
+      "inquiry": "AI 번역 결과를 문서 서식 그대로 유지하려면 어떻게 하나요? 지금은 표가 다 깨져요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        1,
+        0,
+        2,
+        2
+      ],
+      "gold_sum": 9,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S067",
+      "inquiry": "코드 어시스턴트가 사내 코딩 규칙을 지키지 않고 코드를 써요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        0,
+        2
+      ],
+      "gold_sum": 6,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S068",
+      "inquiry": "AI 요약 도구에 올린 파일이 다른 사람에게도 보이는지 알고 싶어요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        2,
+        1
+      ],
+      "gold_sum": 7,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S069",
+      "inquiry": "AI 챗봇이 오늘은 한국어로 물어도 영어로 답해요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        1,
+        1,
+        0,
+        0,
+        2
+      ],
+      "gold_sum": 7,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S070",
+      "inquiry": "ChatGPT 계정에서 대화 기록 삭제하는 방법 좀 알려주세요.",
+      "gold": 1,
+      "gold_metrics": [
+        1,
+        2,
+        0,
+        1,
+        0,
+        2,
+        2
+      ],
+      "gold_sum": 8,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S071",
+      "inquiry": "자산번호 NB-2025-0301, Windows 11 노트북입니다. 사내 AI 챗봇에서 엑셀 파일(매출_10월.xlsx, 3MB)을 분석해 달라고 하면 오늘 오전 9시부터 '파일을 읽을 수 없습니다'라는 메시지가 나옵니다. 어제까지는 같은 파일이 됐고 4번 다시 올려도 똑같습니다. 오류 화면은 첨부했어요. 분석이 되도록 복구해 주세요.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2
+      ],
+      "gold_sum": 13,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S072",
+      "inquiry": "DT-0615 Ubuntu 22.04 데스크탑에서 AI 코드 어시스턴트 플러그인(VS Code 1.89)이 어제 업데이트 이후 자동완성을 아예 못 합니다. 출력 창에 'ECONNREFUSED 10.0.3.15:8443'이 반복돼요. 사내 프록시 설정은 그대로입니다. 연결이 복구되도록 확인 부탁드려요.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 14,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S073",
+      "inquiry": "MB-1203 맥북(macOS Sonoma 14.5)에서 회의록 AI 앱으로 녹음하면 3분쯤 지나 앱이 강제 종료돼요. 어제와 오늘 모두 5번 재현됐고 마이크 권한은 허용 상태입니다. 충돌 보고서를 첨부합니다. 원인 확인을 요청드려요.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2
+      ],
+      "gold_sum": 13,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S074",
+      "inquiry": "AI 번역 도구 API 키 발급을 신청합니다. 신청자는 영업기획팀 박서연이고, 다음 달 1일부터 3개월 동안 해외 거래처 메일 자동 번역 프로토타입에 쓸 예정입니다. 팀장 승인 메일을 첨부했고 하루 호출량은 약 500건 예상입니다.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 13,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S075",
+      "inquiry": "NB-2024-0644(Windows 10)에서 사내 AI 챗봇 웹 페이지가 로딩 중 흰 화면에서 멈춥니다. 오늘 아침 9시 이후 크롬, 엣지 모두 같고, 시크릿 모드와 캐시 삭제도 해봤어요. 콘솔에는 'Failed to fetch chunk 4'가 찍힙니다. 점검 요청합니다.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 14,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S076",
+      "inquiry": "자산번호 NB-2023-0488, Windows 11. 코드 어시스턴트가 Java 파일에서만 제안을 못 해요. 어제 오후부터 시작됐고 Python은 정상입니다. 확장 재설치와 IDE 재시작을 해봤는데 동일해요. 원인 확인을 요청드립니다.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2
+      ],
+      "gold_sum": 13,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S077",
+      "inquiry": "AI 챗봇 사용법 문의입니다. 저는 인사팀이고 매주 월요일 주간 보고서 초안을 작성하는 데 쓰려고 합니다. PDF 3개를 올려서 비교 요약을 받고 싶은데, 한 번에 올릴 수 있는 파일 수 제한과 올바른 질문 방식을 알려주세요. 지금은 2개까지만 올라가고 세 번째는 무반응이에요.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 13,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S078",
+      "inquiry": "사내 이미지 생성 AI 사용 권한을 신청합니다. 마케팅팀 최지훈이고, 11월 캠페인 배너 시안 제작에 필요합니다. 팀장 이수진 님 승인 완료(메일 첨부), 사용 기간은 11/25~12/31, PC는 NB-2025-0147 Windows 11입니다.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2
+      ],
+      "gold_sum": 13,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S079",
+      "inquiry": "회의 요약 AI에서 영어 회의를 올리면 요약이 한국어로 나와서 영어 요약이 필요해요. 지난주 화요일부터 10번 정도 시도했는데 매번 한국어예요. 설정 메뉴의 언어를 English로 바꿔도 동일합니다. 맥(MB-0966, macOS Sonoma 14.5)에서 사용 중이고 크롬 최신 버전입니다. 영어 요약이 나오게 해주세요.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 14,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S080",
+      "inquiry": "AI 챗봇이 오늘 10시부터 같은 질문에 'Error 429 Too Many Requests'를 반환합니다. 저 혼자 1분에 두세 번 물어본 정도입니다. 윈도우 10 PC DT-0102 크롬에서 쓰고, 다른 직원 PC에서는 정상이래요. 제 계정만 제한이 걸렸는지 확인해 주세요.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 14,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S081",
+      "inquiry": "NB-2025-0112(Windows 11): AI 문서 작성 도구가 한글 파일 업로드 시 '지원하지 않는 형식'을 띄웁니다. 오늘 오후 2시부터이고 docx는 정상, hwp만 그렇습니다. 파일은 보고서_초안.hwp(1.2MB)예요. hwp 지원 여부 확인과 가능하면 해결 부탁드립니다.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 14,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S082",
+      "inquiry": "맥북 MB-0820(macOS Sonoma 14.5)에서 Copilot 로그인이 계속 실패합니다. 어제 비밀번호 변경 후부터이고 '인증 토큰이 만료되었습니다' 메시지가 나옵니다. 로그아웃 후 재로그인을 3번 시도했어요. 토큰 초기화를 요청합니다.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 14,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S083",
+      "inquiry": "AI 요약 도구 사용법 질문입니다. 월간 회의록 40쪽 PDF를 장별로 나눠 요약하고 싶어서 '장별로 요약해줘'라고 입력했는데 전체 한 덩어리로만 나와요. DT-0431 Ubuntu 22.04에서 파이어폭스를 쓰고 있습니다. 장별 요약을 받는 질문 방식이 있을까요?",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 13,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S084",
+      "inquiry": "회사 AI 챗봇 API(사내 LLM) 키가 어제 만료된 것 같습니다. 오늘 9시부터 스크립트에서 401 Unauthorized가 나와요. 서버 SV-0007(Ubuntu 22.04)에서 호출하는 배치 작업이고 어제 18시까지는 성공했습니다. 키 재발급 요청드립니다.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 14,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S085",
+      "inquiry": "AI 번역 도구 확장 프로그램을 크롬에 설치했는데 번역 버튼이 안 보여요. NB-2022-0950 Windows 10이고, 어제 설치했으며 크롬 재시작도 해봤습니다. 설치 화면 스크린샷 첨부했어요. 버튼이 보이도록 확인 부탁드립니다.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2
+      ],
+      "gold_sum": 13,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S086",
+      "inquiry": "음성 회의록 AI 사용 권한 요청: 개발1팀 정하윤, 목적은 주간 스프린트 회의 기록. 팀 리드 승인 메일 첨부, 사용 기간 상시, 사용 PC NB-2024-0771(Windows 11).",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2
+      ],
+      "gold_sum": 13,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S087",
+      "inquiry": "사내 AI 챗봇에서 이미지 분석을 쓰려는데 사진을 올리면 '이미지 기능은 비활성화되어 있습니다'라고 나옵니다. 계정이 영업팀 김하늘이고 오늘 처음 시도했습니다. NB-2025-0059 Windows 11이고 다른 텍스트 질문은 잘 됩니다. 이미지 기능을 켜 주실 수 있나요?",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 14,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S088",
+      "inquiry": "AI 코드 어시스턴트가 오늘 11시부터 Go 언어 프로젝트에서만 응답이 30초 넘게 걸립니다. NB-2024-0333 Windows 11, VS Code 1.89, 확장 버전 2.4.1. 다른 언어는 1~2초입니다. 로그 파일을 첨부했어요. 원인 확인 부탁드립니다.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2
+      ],
+      "gold_sum": 13,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S089",
+      "inquiry": "AI 번역 도구가 계약서 번역 시 '당사'를 자꾸 'our country'로 번역합니다. 지난주부터 5건 모두 동일했고 용어집 등록 방법을 알려주세요. 입력 예: '당사는 계약을 해지할 수 있다', 출력: 'Our country can terminate the contract'. 크롬, NB-2025-0204 Windows 11 사용 중입니다.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 14,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S090",
+      "inquiry": "AI 챗봇 응답 속도 문제입니다. 오늘 14시~15시 사이 평균 20초 걸렸어요(평소 3초). 질문 길이는 비슷했고 NB-2023-0215 Windows 11, 유선망입니다. 측정 시간 기록 첨부합니다. 서버 상태 확인 요청드려요.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2
+      ],
+      "gold_sum": 13,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S091",
+      "inquiry": "코드 어시스턴트 라이선스 추가 신청: 데이터팀 신규 입사자 3명(이름은 첨부 표 참고), 11월 28일 입사, 팀장 승인 완료, PC는 각각 DT-0902, DT-0903, DT-0904 Windows 11입니다.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2
+      ],
+      "gold_sum": 13,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S092",
+      "inquiry": "AI 회의록 도구가 한국어 존칭을 모두 반말로 바꿔서 요약합니다. 어제 3건, 오늘 2건 모두 그랬고 설정에서 '존댓말 유지'를 켜도 똑같아요. MB-1203(macOS Sonoma 14.5) 사파리에서 사용합니다. 설정이 적용되도록 확인해 주세요.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 14,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S093",
+      "inquiry": "AI 챗봇이 외부 링크를 열라고 안내하는데 사내 보안 정책상 괜찮은지 궁금합니다. 오늘 질문에서 'https://example-ai.co/…' 링크를 안내했고 스크린샷을 첨부합니다. NB-2024-0912 Windows 10에서 확인했고, 해당 링크 안전 여부와 챗봇 설정 조치를 요청합니다.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2
+      ],
+      "gold_sum": 13,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S094",
+      "inquiry": "AI 이미지 생성 도구에서 생성한 이미지가 모두 워터마크가 붙어서 나옵니다. 어제까지는 없었고 오늘 아침부터이며 10장 모두 동일합니다. 설정에서 워터마크 옵션은 꺼져 있어요. NB-2025-0147 Windows 11 크롬입니다. 원인과 해제 방법을 알려주세요.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 14,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S095",
+      "inquiry": "AI 코드 어시스턴트가 생성한 코드가 사내 라이선스 정책에 맞는지 검토를 요청합니다. 대상은 결제 모듈 PR #482이고, 생성된 파일 3개를 첨부했어요. 개발2팀 NB-2024-0188 Windows 11, 11월 30일까지 필요합니다.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2
+      ],
+      "gold_sum": 13,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S096",
+      "inquiry": "사내 AI 챗봇에 로그인하면 '권한이 없습니다(403)'가 뜹니다. 어제 권한 신청이 승인됐다는 메일을 받았고(첨부) 오늘 아침 8시 30분부터 세 번 시도했어요. NB-2025-0301 Windows 11 크롬입니다. 권한이 반영됐는지 확인 부탁드립니다.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 14,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S097",
+      "inquiry": "AI 요약 도구가 한글 문서의 각주를 요약에서 계속 빼먹습니다. 오늘 5개 문서 모두 동일했고 같은 문서를 영어로 바꾸면 각주가 포함됩니다. DT-0615 Ubuntu 22.04 파이어폭스입니다. 각주 포함 방법을 안내해 주세요.",
+      "gold": 2,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "gold_sum": 14,
+      "difficulty": "easy",
+      "tags": []
+    },
+    {
+      "id": "S098",
+      "inquiry": "NB-2022-0310 Windows 10 노트북에서 AI 번역 도구가 오늘 오후부터 PDF를 올리면 업로드 바가 90%에서 멈춥니다. 세 번 다시 해도 같았어요. 파일은 약 8MB입니다. 확인해 주세요.",
+      "gold": 2,
+      "gold_metrics": [
+        1,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2
+      ],
+      "gold_sum": 12,
+      "difficulty": "medium",
+      "tags": []
+    },
+    {
+      "id": "S099",
+      "inquiry": "자산번호 NB-2025-0301, Windows 11, 사내 AI 챗봇. 오늘 9시부터 엑셀 분석 요청 시 응답이 비어 있고 어제는 정상이었으며 5번 재현됩니다. 오류 팝업 문구는 'Empty response (code 204)'였어요.",
+      "gold": 1,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        0,
+        2
+      ],
+      "gold_sum": 12,
+      "difficulty": "hard",
+      "tags": [
+        "0점지표로하향"
+      ]
+    },
+    {
+      "id": "S100",
+      "inquiry": "NB-2024-0644 Windows 10, 사내 AI 번역 도구에서 어제 17시부터 docx 업로드가 실패합니다. 오늘도 같습니다. 업로드 버튼을 누르면 아무 반응이 없어요. 복구 부탁드립니다.",
+      "gold": 1,
+      "gold_metrics": [
+        2,
+        2,
+        2,
+        2,
+        0,
+        2,
+        2
+      ],
+      "gold_sum": 12,
+      "difficulty": "hard",
+      "tags": [
+        "0점지표로하향"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1325 @@
+{
+  "name": "classify_eval",
+  "description": "IT 문의 분류(장애, 권한, 사용법, 기타, 빈값) 평가용 질문/정답 100쌍",
+  "guideline": {
+    "label_set": [
+      "장애",
+      "권한",
+      "사용법",
+      "기타",
+      ""
+    ],
+    "empty_label_meaning": "빈값은 근거가 불명확하거나 둘 이상의 분류에 비슷한 비중으로 걸려 하나로 정할 수 없을 때의 정답입니다.",
+    "definitions": {
+      "장애": "시스템, 장비, 서비스가 지금 고장났거나 오류가 나거나 정상 동작하지 않거나 느려졌다고 호소하는 문의",
+      "권한": "계정 생성, 잠금 해제, 비밀번호 초기화, 접근 권한, 라이선스 배정, 설치나 반출 승인을 요청하는 문의. 접근 거부 문구가 명시된 경우도 포함",
+      "사용법": "도구나 기능을 어떻게 쓰는지 묻는 문의. 오작동 호소가 없어야 함",
+      "기타": "IT와 관련되지만 위 셋에 해당하지 않는 문의. 장비 구매와 이전과 반납, 정책과 보안 규정 질문, 보안 신고, 담당자와 비용 문의, 자산 정보 조회, 과거 장애의 사후 원인 문의, 감사와 불만"
+    },
+    "tie_break_rules": [
+      "증상을 호소하면서 해결 방법을 묻는 경우('안 되는데 어떻게 하죠')는 장애로 본다.",
+      "'권한은 있다', '설정은 안 바꿨다'처럼 다른 원인을 부정한 경우, 부정된 분류로 보지 않는다.",
+      "접근 거부 또는 권한 없음 문구가 명시되면 권한으로 본다. 단순 접속 불가는 장애다.",
+      "권한을 받는 절차를 묻는 경우는 사용법이 아니라 권한으로 본다.",
+      "정책 허용 여부를 묻는 질문은 기타, 허가를 받겠다는 요청은 권한이다.",
+      "지금은 정상이고 과거 증상의 원인만 묻는 경우는 기타로 본다.",
+      "증상 호소와 방법 문의가 같은 비중으로 섞여 있으면 빈값으로 본다.",
+      "대상이나 증상이 없는 짧은 문의, 앞선 맥락이 필요한 문의는 빈값이다."
+    ]
+  },
+  "counts": {
+    "gold": {
+      "사용법": 22,
+      "기타": 16,
+      "권한": 22,
+      "장애": 26,
+      "빈값": 14
+    },
+    "difficulty": {
+      "easy": 36,
+      "medium": 46,
+      "hard": 18
+    }
+  },
+  "items": [
+    {
+      "id": "C001",
+      "inquiry": "How do I share my screen in Zoom with audio?",
+      "gold": "사용법",
+      "difficulty": "easy",
+      "tags": [
+        "영어"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C002",
+      "inquiry": "사용하던 노트북을 반납하려는데 어디로 가져가면 되나요?",
+      "gold": "기타",
+      "difficulty": "medium",
+      "tags": [
+        "반납"
+      ],
+      "note": "장비 반납 위치 문의.",
+      "alt_labels": [
+        "사용법"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C003",
+      "inquiry": "사내 GitHub 조직에 제 계정을 초대해 주세요.",
+      "gold": "권한",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C004",
+      "inquiry": "ERP 매출 조회 메뉴 접근 권한이 필요합니다. 팀장 승인은 받았어요.",
+      "gold": "권한",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C005",
+      "inquiry": "노트북에서 외장 모니터를 확장 모드로 쓰려면 설정을 어디서 바꾸나요?",
+      "gold": "사용법",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C006",
+      "inquiry": "구글 캘린더에서 반복 일정을 하나만 삭제하는 방법이 궁금해요.",
+      "gold": "사용법",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C007",
+      "inquiry": "관리자 권한으로 프로그램을 설치해야 하는데 제 PC에 관리자 권한을 임시로 줄 수 있나요?",
+      "gold": "권한",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C008",
+      "inquiry": "개발팀 서버를 증설하려면 예산 승인부터 받아야 하나요? 누구에게 문의해야 할지 모르겠어요.",
+      "gold": "기타",
+      "difficulty": "medium",
+      "tags": [
+        "담당자문의"
+      ],
+      "note": "",
+      "alt_labels": [
+        "권한"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C009",
+      "inquiry": "개발 서버 SSH 접근 권한을 신청하고 싶습니다.",
+      "gold": "권한",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C010",
+      "inquiry": "마우스 커서가 혼자 움직이다가 자꾸 멈춰요.",
+      "gold": "장애",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C011",
+      "inquiry": "프린터 먹통임 ㅠㅠ 종이만 걸리고 아무것도 안나옴",
+      "gold": "장애",
+      "difficulty": "easy",
+      "tags": [
+        "구어체"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C012",
+      "inquiry": "공유 문서에서 제가 수정한 내용만 따로 보려면 어떻게 하나요?",
+      "gold": "사용법",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C013",
+      "inquiry": "신규 입사자용 노트북 2대를 구매 요청하려고 합니다. 진행 절차와 예상 소요 기간이 궁금합니다.",
+      "gold": "기타",
+      "difficulty": "medium",
+      "tags": [
+        "구매"
+      ],
+      "note": "장비 구매 문의. 승인 절차를 묻지만 접근 권한 요청은 아님.",
+      "alt_labels": [
+        "권한"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C014",
+      "inquiry": "계정 문제인지 서버 문제인지 모르겠는데 메일이 안 열려요. 어디부터 봐야 할까요?",
+      "gold": "",
+      "difficulty": "hard",
+      "tags": [
+        "복합의도",
+        "모호"
+      ],
+      "note": "사용자 스스로 권한과 장애 사이에서 판단하지 못한다고 밝힘.",
+      "alt_labels": [
+        "장애",
+        "권한"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C015",
+      "inquiry": "모니터 화면이 계속 깜빡거려요. 케이블은 바꿔 봤는데 똑같아요.",
+      "gold": "장애",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C016",
+      "inquiry": "프린터에서 인쇄하면 글자가 흐리게 나오고 줄이 생겨요.",
+      "gold": "장애",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C017",
+      "inquiry": "아까 말씀드린 그거 다시 확인해 주세요.",
+      "gold": "",
+      "difficulty": "medium",
+      "tags": [
+        "문맥의존"
+      ],
+      "note": "앞선 대화가 없어 '그거'를 알 수 없음.",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C018",
+      "inquiry": "IT 헬프데스크 운영 시간이 어떻게 되나요?",
+      "gold": "기타",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C019",
+      "inquiry": "수상한 메일을 받았는데 링크를 누르면 안 되는 거죠? 어디에 신고하나요?",
+      "gold": "기타",
+      "difficulty": "easy",
+      "tags": [
+        "보안신고"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C020",
+      "inquiry": "USB 저장장치 사용 허가를 받고 싶습니다. 협력사 납품 자료를 옮겨야 해요.",
+      "gold": "권한",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "'사용해도 되는지 묻는 정책 질문'이 아니라 허가를 받겠다는 요청이라 권한.",
+      "alt_labels": [
+        "기타"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C021",
+      "inquiry": "프린터 스캔 기능으로 문서를 메일로 바로 보내는 방법이 궁금합니다.",
+      "gold": "사용법",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C022",
+      "inquiry": "노트북 배터리 절약 모드는 어디서 켜나요?",
+      "gold": "사용법",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C023",
+      "inquiry": "사내 메일(Outlook)이 열 때마다 '응답 없음'이 뜨면서 멈춰요.",
+      "gold": "장애",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C024",
+      "inquiry": "ERP",
+      "gold": "",
+      "difficulty": "easy",
+      "tags": [
+        "짧은문의"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C025",
+      "inquiry": "Teams 회의 녹화는 어디서 시작하나요?",
+      "gold": "사용법",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C026",
+      "inquiry": "맥북에서 한글 문서(hwp)를 열려면 어떤 프로그램을 쓰면 되나요?",
+      "gold": "사용법",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C027",
+      "inquiry": "어제 프린터가 계속 안 됐다가 오후에 갑자기 정상으로 돌아왔어요. 원인이 뭐였는지 궁금합니다.",
+      "gold": "기타",
+      "difficulty": "hard",
+      "tags": [
+        "사후문의",
+        "키워드함정"
+      ],
+      "note": "지금은 정상 동작이고 지난 증상의 원인을 묻는 것이라 기타.",
+      "alt_labels": [
+        "장애"
+      ],
+      "showcase": true,
+      "showcase_rank": 7
+    },
+    {
+      "id": "C028",
+      "inquiry": "어제 오후 3시쯤 사내 백신 프로그램이 업데이트됐다는 알림이 뜨고 나서부터 PC가 너무 느려졌습니다. 크롬 탭 두 개만 열어도 버벅이고 작업 관리자를 보니 백신 프로세스가 CPU를 90% 이상 쓰고 있어요.",
+      "gold": "장애",
+      "difficulty": "medium",
+      "tags": [
+        "긴서술",
+        "성능저하"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C029",
+      "inquiry": "회사 노트북을 집에 가져가서 개인 용도로 써도 되는지 궁금합니다.",
+      "gold": "기타",
+      "difficulty": "medium",
+      "tags": [
+        "정책문의"
+      ],
+      "note": "",
+      "alt_labels": [
+        "권한"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C030",
+      "inquiry": "IT 담당자 연락처를 알려주세요.",
+      "gold": "기타",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C031",
+      "inquiry": "엑셀에서 셀 서식을 바꿔도 숫자가 계속 날짜로 보이는데 이건 원래 그런 건가요?",
+      "gold": "사용법",
+      "difficulty": "hard",
+      "tags": [
+        "장애처럼보임",
+        "질문형"
+      ],
+      "note": "고장 호소가 아니라 기능의 동작 원리를 묻는 질문('원래 그런 건가요').",
+      "alt_labels": [
+        "장애"
+      ],
+      "showcase": true,
+      "showcase_rank": 5
+    },
+    {
+      "id": "C032",
+      "inquiry": "ERP에서 결재 상신 버튼을 누르면 '서버 오류가 발생했습니다'라는 팝업이 떠요.",
+      "gold": "장애",
+      "difficulty": "easy",
+      "tags": [
+        "오류코드"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C033",
+      "inquiry": "새로 산 마우스는 어떻게 하면 좋을까요?",
+      "gold": "",
+      "difficulty": "medium",
+      "tags": [
+        "모호"
+      ],
+      "note": "무엇을 원하는지 알 수 없음.",
+      "alt_labels": [
+        "사용법",
+        "기타"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C034",
+      "inquiry": "신입사원 노트북 셋업 좀 부탁드립니다.",
+      "gold": "",
+      "difficulty": "hard",
+      "tags": [
+        "모호",
+        "복합의도"
+      ],
+      "note": "계정 발급, 소프트웨어 설치, 장비 준비 중 무엇인지 알 수 없어 분류 근거 부족.",
+      "alt_labels": [
+        "권한",
+        "기타"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C035",
+      "inquiry": "사내 AI 챗봇이 답변을 만들다가 중간에 계속 멈춰요.",
+      "gold": "장애",
+      "difficulty": "easy",
+      "tags": [
+        "AI"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C036",
+      "inquiry": "팀 공유 폴더(영업자료)에 읽기 권한을 요청합니다.",
+      "gold": "권한",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C037",
+      "inquiry": "노트북 보증 기간이 언제 끝나는지 확인해 주세요.",
+      "gold": "기타",
+      "difficulty": "hard",
+      "tags": [
+        "자산정보"
+      ],
+      "note": "자산 정보 조회 요청. 증상 호소도 권한 요청도 아님.",
+      "alt_labels": [
+        "사용법"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C038",
+      "inquiry": "윈도우에서 화면을 두 개로 나눠서 쓰는 단축키가 있나요?",
+      "gold": "사용법",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C039",
+      "inquiry": "회의실 화상회의 장비 카메라가 영상이 거꾸로 나와요.",
+      "gold": "장애",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C040",
+      "inquiry": "외부 협력사 직원 3명에게 프로젝트 위키 읽기 권한을 주고 싶습니다.",
+      "gold": "권한",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C041",
+      "inquiry": "클라우드 비용이 이번 달 왜 이렇게 많이 나왔는지 팀별로 내역을 보고 싶어요.",
+      "gold": "기타",
+      "difficulty": "medium",
+      "tags": [
+        "비용"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C042",
+      "inquiry": "회의실 빔프로젝터가 켜졌는데 화면이 안 나옵니다. HDMI 연결은 확인했어요.",
+      "gold": "장애",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C043",
+      "inquiry": "AWS 콘솔에 로그인할 수 있는 IAM 계정을 발급받고 싶어요.",
+      "gold": "권한",
+      "difficulty": "medium",
+      "tags": [
+        "영어혼용"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C044",
+      "inquiry": "VPN 클라이언트를 처음 설치했는데 접속 프로파일은 어디서 선택하는 건가요?",
+      "gold": "사용법",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "설치 직후 첫 사용 방법을 묻는 것이고 오작동 호소가 없음.",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C045",
+      "inquiry": "엑셀에서 두 열의 중복값을 찾는 방법을 알려주세요.",
+      "gold": "사용법",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C046",
+      "inquiry": "사내 포털에서 휴가 신청서 양식은 어디서 내려받나요?",
+      "gold": "사용법",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C047",
+      "inquiry": "구글드라이브 공유 걸어주세요 팀장님이 쓰던거요",
+      "gold": "권한",
+      "difficulty": "hard",
+      "tags": [
+        "구어체",
+        "짧은문의"
+      ],
+      "note": "문장은 거칠지만 공유(접근) 허용 요청.",
+      "alt_labels": [
+        "기타"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C048",
+      "inquiry": "비밀번호 초기화 링크를 메일로 보내 주세요. 비밀번호를 완전히 잊어버렸어요.",
+      "gold": "권한",
+      "difficulty": "medium",
+      "tags": [
+        "계정"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C049",
+      "inquiry": "비밀번호를 5번 틀려서 계정이 잠겼어요. 잠금 해제 부탁드립니다.",
+      "gold": "권한",
+      "difficulty": "easy",
+      "tags": [
+        "계정"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C050",
+      "inquiry": "권한 문제는 아닌 것 같은데, 로그인은 되고 메뉴도 보이는데 데이터가 안 불러와져요.",
+      "gold": "장애",
+      "difficulty": "hard",
+      "tags": [
+        "키워드함정",
+        "부정표현"
+      ],
+      "note": "권한 문제가 아니라고 선을 그었고 증상은 데이터 로딩 실패.",
+      "alt_labels": [
+        "권한"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C051",
+      "inquiry": "노트북 화면을 TV에 무선으로 연결하는 방법 알려주세요.",
+      "gold": "사용법",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C052",
+      "inquiry": "PC 상태가 평소랑 달라서요. 한번 봐주세요.",
+      "gold": "",
+      "difficulty": "medium",
+      "tags": [
+        "모호"
+      ],
+      "note": "무엇이 어떻게 다른지 적혀 있지 않음.",
+      "alt_labels": [
+        "장애"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C053",
+      "inquiry": "개인 휴대폰으로 사내 메일을 봐도 되나요? 보안 규정이 어떻게 되는지 궁금합니다.",
+      "gold": "기타",
+      "difficulty": "hard",
+      "tags": [
+        "정책문의"
+      ],
+      "note": "허용 여부를 묻는 정책 질문이라 기타. 접근 요청이 아니므로 권한과 구분.",
+      "alt_labels": [
+        "권한"
+      ],
+      "showcase": true,
+      "showcase_rank": 8
+    },
+    {
+      "id": "C054",
+      "inquiry": "파워포인트에서 슬라이드 번호를 첫 장은 빼고 넣으려면 어떻게 하나요?",
+      "gold": "사용법",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C055",
+      "inquiry": "다음 주부터 재택근무라 사내 NAS를 집에서도 접근할 수 있게 열어 주세요.",
+      "gold": "권한",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C056",
+      "inquiry": "사내 AI 챗봇에 파일을 올려서 요약시키는 방법을 알려주세요.",
+      "gold": "사용법",
+      "difficulty": "medium",
+      "tags": [
+        "AI"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C057",
+      "inquiry": "laptop battery drains in 20 minutes even after full charge",
+      "gold": "장애",
+      "difficulty": "medium",
+      "tags": [
+        "영어"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C058",
+      "inquiry": "와이파이는 연결돼 있다고 뜨는데 인터넷 페이지가 하나도 안 열립니다.",
+      "gold": "장애",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "연결 표시와 실제 동작이 다른 증상이라 장애.",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C059",
+      "inquiry": "사무실 이전할 때 모니터랑 도킹스테이션은 제가 직접 옮겨야 하나요?",
+      "gold": "기타",
+      "difficulty": "medium",
+      "tags": [
+        "이전"
+      ],
+      "note": "장애, 권한, 사용법 어디에도 맞지 않는 이전 업무 문의.",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C060",
+      "inquiry": "인사팀 전용 폴더에 제 이름이 접근 허용 목록에 있는지 확인해 주세요.",
+      "gold": "권한",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C061",
+      "inquiry": "Slack 알림을 근무 시간에만 받도록 설정할 수 있나요? 가능하다면 방법도 알려주세요.",
+      "gold": "사용법",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C062",
+      "inquiry": "VPN은 붙었다고 나오는데 사내 시스템 주소로 들어가면 연결 시간 초과가 납니다. 권한은 어제 받았어요.",
+      "gold": "장애",
+      "difficulty": "hard",
+      "tags": [
+        "키워드함정",
+        "부정표현"
+      ],
+      "note": "권한은 이미 받았다고 밝혀 권한 문의가 아님. 증상은 연결 시간 초과.",
+      "alt_labels": [
+        "권한"
+      ],
+      "showcase": true,
+      "showcase_rank": 3
+    },
+    {
+      "id": "C063",
+      "inquiry": "노트북 팬이 계속 엄청 크게 돌고 본체가 너무 뜨거워요. 10분만 써도 그래요.",
+      "gold": "장애",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C064",
+      "inquiry": "그룹웨어에 접속하면 502 Bad Gateway 오류가 납니다.",
+      "gold": "장애",
+      "difficulty": "easy",
+      "tags": [
+        "오류코드"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C065",
+      "inquiry": "Jira에서 내가 담당자로 지정된 이슈만 모아서 보려면 어떻게 하나요?",
+      "gold": "사용법",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C066",
+      "inquiry": "사내 Wi-Fi 비밀번호 정책(주기, 길이)이 어떻게 되는지 알고 싶습니다.",
+      "gold": "기타",
+      "difficulty": "easy",
+      "tags": [
+        "정책문의"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C067",
+      "inquiry": "VPN이 안 돼요. 접속 방법도 알려주세요.",
+      "gold": "",
+      "difficulty": "hard",
+      "tags": [
+        "복합의도"
+      ],
+      "note": "증상 호소(장애)와 방법 문의(사용법)가 같은 비중이라 하나로 정할 수 없음.",
+      "alt_labels": [
+        "장애",
+        "사용법"
+      ],
+      "showcase": true,
+      "showcase_rank": 9
+    },
+    {
+      "id": "C068",
+      "inquiry": "새 프로젝트 팀원 5명에게 같은 권한을 한 번에 주고 싶은데 어떻게 요청하면 되나요?",
+      "gold": "권한",
+      "difficulty": "hard",
+      "tags": [
+        "질문형",
+        "절차문의"
+      ],
+      "note": "요청 절차를 묻는 형식이지만 대상이 권한 부여라 권한. 사용법(절차 설명)과 혼동하기 쉬움.",
+      "alt_labels": [
+        "사용법"
+      ],
+      "showcase": true,
+      "showcase_rank": 6
+    },
+    {
+      "id": "C069",
+      "inquiry": "신규 입사자인데 그룹웨어 계정을 만들어 주세요.",
+      "gold": "권한",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C070",
+      "inquiry": "Adobe Creative Cloud 라이선스를 배정해 주실 수 있을까요?",
+      "gold": "권한",
+      "difficulty": "easy",
+      "tags": [
+        "라이선스"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C071",
+      "inquiry": "공용 NAS에 파일을 저장하면 가끔 '네트워크 경로를 찾을 수 없음'이 떠요. 매번은 아니고 오후에 자주 그래요.",
+      "gold": "장애",
+      "difficulty": "medium",
+      "tags": [
+        "간헐적"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C072",
+      "inquiry": "비밀번호는 정확히 입력했는데 사내 포털 로그인 화면에서 계속 로딩만 돌다가 끝나요.",
+      "gold": "장애",
+      "difficulty": "hard",
+      "tags": [
+        "키워드함정"
+      ],
+      "note": "비밀번호 문제가 아님을 밝혔고 증상은 화면 무한 로딩이라 장애.",
+      "alt_labels": [
+        "권한"
+      ],
+      "showcase": true,
+      "showcase_rank": 2
+    },
+    {
+      "id": "C073",
+      "inquiry": "공유 드라이브 폴더를 열려고 하면 '액세스가 거부되었습니다'가 나오는데 어제까지는 잘 열렸어요.",
+      "gold": "권한",
+      "difficulty": "hard",
+      "tags": [
+        "키워드함정",
+        "장애처럼보임"
+      ],
+      "note": "접근 거부 문구가 명시되어 권한 변경이나 누락이 원인. 어제까지 됐다는 점 때문에 장애로 오인하기 쉬움.",
+      "alt_labels": [
+        "장애"
+      ],
+      "showcase": true,
+      "showcase_rank": 1
+    },
+    {
+      "id": "C074",
+      "inquiry": "노트북 관련해서 몇 가지 여쭤보려고요.",
+      "gold": "",
+      "difficulty": "medium",
+      "tags": [
+        "모호"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C075",
+      "inquiry": "Outlook에서 받은 메일을 폴더로 자동 분류하는 규칙은 어떻게 만드나요?",
+      "gold": "사용법",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C076",
+      "inquiry": "로그인이 안 돼요.",
+      "gold": "",
+      "difficulty": "hard",
+      "tags": [
+        "짧은문의",
+        "모호"
+      ],
+      "note": "대상이 없고 원인이 계정(권한)인지 시스템(장애)인지 알 수 없음.",
+      "alt_labels": [
+        "장애",
+        "권한"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C077",
+      "inquiry": "PDF 파일에 서명을 넣고 싶은데 사내에서 쓰는 프로그램이 있나요? 사용 방법을 알고 싶어요.",
+      "gold": "사용법",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C078",
+      "inquiry": "퇴사한 전임자의 메일함을 제가 열람할 수 있게 해주세요.",
+      "gold": "권한",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C079",
+      "inquiry": "엑셀 파일을 저장할 때마다 '파일이 손상되었습니다' 메시지가 나옵니다.",
+      "gold": "장애",
+      "difficulty": "medium",
+      "tags": [
+        "오류코드"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C080",
+      "inquiry": "ㅠㅠ 어제부터 계속 이래요 진짜 불편해요",
+      "gold": "",
+      "difficulty": "medium",
+      "tags": [
+        "감정표현",
+        "문맥의존"
+      ],
+      "note": "감정만 있고 대상과 증상이 없음.",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C081",
+      "inquiry": "신규 시스템 도입을 검토 중인데 IT팀 담당자와 미팅을 잡고 싶습니다.",
+      "gold": "기타",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C082",
+      "inquiry": "도와주세요.",
+      "gold": "",
+      "difficulty": "easy",
+      "tags": [
+        "짧은문의"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C083",
+      "inquiry": "사내 메일에 부재중 자동응답을 설정하는 방법이 궁금합니다.",
+      "gold": "사용법",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C084",
+      "inquiry": "문의드립니다.",
+      "gold": "",
+      "difficulty": "easy",
+      "tags": [
+        "짧은문의"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C085",
+      "inquiry": "어제 고장 났던 프린터 수리해 주신 분께 감사 인사 전해주세요. 덕분에 잘 쓰고 있습니다.",
+      "gold": "기타",
+      "difficulty": "easy",
+      "tags": [
+        "감사"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C086",
+      "inquiry": "안 돼요.",
+      "gold": "",
+      "difficulty": "easy",
+      "tags": [
+        "짧은문의"
+      ],
+      "note": "대상과 증상이 없어 어떤 분류도 근거가 없음.",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C087",
+      "inquiry": "슬랙에서 알림이 어제부터 오지 않는데 설정을 바꾼 적은 없습니다.",
+      "gold": "장애",
+      "difficulty": "hard",
+      "tags": [
+        "부정표현"
+      ],
+      "note": "설정을 바꾸지 않았다고 해 설정 방법 문의가 아니라 오동작 호소.",
+      "alt_labels": [
+        "사용법"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C088",
+      "inquiry": "회의실 예약 시스템에서 반복 예약을 취소했는데 안 지워져요. 어떻게 지우나요?",
+      "gold": "",
+      "difficulty": "hard",
+      "tags": [
+        "복합의도",
+        "질문형증상"
+      ],
+      "note": "취소가 안 되는 증상(장애)과 지우는 방법(사용법)이 함께 있어 한쪽으로 정하기 어려움.",
+      "alt_labels": [
+        "장애",
+        "사용법"
+      ],
+      "showcase": true,
+      "showcase_rank": 10
+    },
+    {
+      "id": "C089",
+      "inquiry": "MFA 인증 기기를 새 휴대폰으로 변경하고 싶은데 기존 등록을 풀어 주세요.",
+      "gold": "권한",
+      "difficulty": "easy",
+      "tags": [
+        "계정"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C090",
+      "inquiry": "화면 캡처 단축키를 눌러도 아무것도 저장이 안 되는데 어떻게 해야 하나요?",
+      "gold": "장애",
+      "difficulty": "hard",
+      "tags": [
+        "질문형증상"
+      ],
+      "note": "'어떻게'로 끝나지만 핵심은 기능이 동작하지 않는다는 증상 호소.",
+      "alt_labels": [
+        "사용법"
+      ],
+      "showcase": true,
+      "showcase_rank": 4
+    },
+    {
+      "id": "C091",
+      "inquiry": "사내 와이파이가 5층 회의실에서만 계속 끊깁니다.",
+      "gold": "장애",
+      "difficulty": "medium",
+      "tags": [
+        "간헐적"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C092",
+      "inquiry": "노트북 전원 버튼을 눌러도 아무 반응이 없어요. 충전기를 꽂아도 불이 안 들어와요.",
+      "gold": "장애",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C093",
+      "inquiry": "어제 윈도우 업데이트하고 나서 노트북이 부팅하는 데 10분씩 걸려요.",
+      "gold": "장애",
+      "difficulty": "medium",
+      "tags": [
+        "성능저하"
+      ],
+      "note": "고장은 아니지만 정상 동작이 아닌 성능 저하 호소.",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C094",
+      "inquiry": "퇴사 예정자(내일 퇴사)의 모든 시스템 계정을 오늘 자로 비활성화해 주세요.",
+      "gold": "권한",
+      "difficulty": "medium",
+      "tags": [
+        "계정"
+      ],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C095",
+      "inquiry": "Teams 회의에서 제 목소리만 상대방에게 안 들린다고 해요. 마이크 설정은 정상으로 보이는데요.",
+      "gold": "장애",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "설정을 확인했다는 말이 있어도 증상 호소가 핵심.",
+      "alt_labels": [
+        "사용법"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C096",
+      "inquiry": "지난주 메일 서버 장애는 원인이 무엇이었고 재발 방지는 어떻게 하나요? 감사팀에 보고해야 해서요.",
+      "gold": "기타",
+      "difficulty": "hard",
+      "tags": [
+        "사후문의"
+      ],
+      "note": "현재 증상 호소가 아니라 과거 장애의 원인 보고 요청.",
+      "alt_labels": [
+        "장애"
+      ],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C097",
+      "inquiry": "새로 만든 슬랙 채널에 외부 게스트를 초대할 수 있게 승인해 주세요.",
+      "gold": "권한",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C098",
+      "inquiry": "해외 출장 동안 VPN을 해외에서도 쓸 수 있게 허용해 주세요.",
+      "gold": "권한",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C099",
+      "inquiry": "새로 받은 노트북인데 USB 포트 두 개가 인식을 못 해요.",
+      "gold": "장애",
+      "difficulty": "medium",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    },
+    {
+      "id": "C100",
+      "inquiry": "화상회의에서 배경 흐림 기능은 어떻게 켜나요?",
+      "gold": "사용법",
+      "difficulty": "easy",
+      "tags": [],
+      "note": "",
+      "alt_labels": [],
+      "showcase": false,
+      "showcase_rank": null
+    }
+  ]
+}

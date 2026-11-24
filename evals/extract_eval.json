@@ -1,0 +1,1667 @@
+{
+  "name": "extract_eval",
+  "description": "IT 문의에서 asset_id, os, 증상을 추출하는 태스크의 평가용 문의/정답 100쌍 (정보가 없는 경우 포함)",
+  "guideline": {
+    "asset_id": "문의에 적힌 자산번호(장비 식별 코드). 티켓, 오류 코드, 모델명, 버전, 날짜, 프로젝트나 문서 번호는 자산번호가 아님. 여러 개면 문제가 있는 장비. 없으면 '없음'.",
+    "os": "문의에 운영체제 이름이 적혀 있을 때만 정규 표기로 적는다(예: Windows 11, macOS Sonoma 14.5, Ubuntu 22.04). 맥북, 아이폰 같은 장비 이름만으로는 추정하지 않음. 에디션(Pro 등)은 무시. 없으면 '없음'.",
+    "symptom": "사용자가 겪는 문제나 요청 내용. 인사, 정보 전달만 있고 문제나 요청이 없으면 '없음'. 정답 비교는 필수 요소(symptom_points)를 모두 담았는지로 판정한다."
+  },
+  "counts": {
+    "asset_id_absent": 47,
+    "os_absent": 55,
+    "symptom_absent": 13,
+    "difficulty": {
+      "easy": 47,
+      "medium": 38,
+      "hard": 15
+    }
+  },
+  "items": [
+    {
+      "id": "X001",
+      "inquiry": "자산번호 NB-2025-0112, Windows 11 노트북입니다. 사내 VPN에 연결하면 '인증 시간 초과' 메시지가 나오고 접속이 안 돼요.",
+      "gold": {
+        "asset_id": "NB-2025-0112",
+        "os": "Windows 11",
+        "symptom": "VPN 연결 시 '인증 시간 초과' 메시지와 함께 접속 불가",
+        "symptom_points": [
+          "VPN 접속 불가",
+          "인증 시간 초과"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X002",
+      "inquiry": "DT-0615 데스크탑(Ubuntu 22.04)에서 도커 컨테이너가 시작되지 않고 permission denied 오류가 뜹니다.",
+      "gold": {
+        "asset_id": "DT-0615",
+        "os": "Ubuntu 22.04",
+        "symptom": "도커 컨테이너가 시작되지 않고 permission denied 오류 발생",
+        "symptom_points": [
+          "컨테이너 시작 안 됨",
+          "permission denied"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X003",
+      "inquiry": "맥북 asset: MB-1203, macOS Ventura 13.6 쓰는데 키노트 발표 모드에서 화면이 검게 나와요.",
+      "gold": {
+        "asset_id": "MB-1203",
+        "os": "macOS Ventura 13.6",
+        "symptom": "키노트 발표 모드에서 화면이 검게 나옴",
+        "symptom_points": [
+          "키노트 발표 모드",
+          "화면이 검게"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X004",
+      "inquiry": "PR-0210 프린터 연결용 PC가 윈도우 10인데 인쇄 대기열에 문서가 쌓이기만 하고 출력이 안 됩니다.",
+      "gold": {
+        "asset_id": "PR-0210",
+        "os": "Windows 10",
+        "symptom": "인쇄 대기열에 문서가 쌓이고 출력되지 않음",
+        "symptom_points": [
+          "대기열에 쌓임",
+          "출력 안 됨"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "한글표기"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X005",
+      "inquiry": "(자산번호: NB-2023-0488) Windows 10 쓰고 있는데 엑셀 매크로 실행하면 '런타임 오류 1004'가 납니다.",
+      "gold": {
+        "asset_id": "NB-2023-0488",
+        "os": "Windows 10",
+        "symptom": "엑셀 매크로 실행 시 런타임 오류 1004 발생",
+        "symptom_points": [
+          "엑셀 매크로",
+          "런타임 오류 1004"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [
+        "괄호표기"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X006",
+      "inquiry": "자산번호는 TB-0033이고 안드로이드 14 태블릿에서 사내 앱이 로그인 직후 튕겨요.",
+      "gold": {
+        "asset_id": "TB-0033",
+        "os": "Android 14",
+        "symptom": "사내 앱이 로그인 직후 종료됨",
+        "symptom_points": [
+          "사내 앱",
+          "로그인 직후 종료"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "한글표기"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X007",
+      "inquiry": "NB-2024-0771 노트북, 윈도우11 프로. 오늘 아침부터 배터리가 한 시간도 안 가요.",
+      "gold": {
+        "asset_id": "NB-2024-0771",
+        "os": "Windows 11",
+        "symptom": "배터리가 한 시간도 못 감",
+        "symptom_points": [
+          "배터리 지속 시간 짧음"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "한글표기"
+      ],
+      "note": "에디션(프로)은 무시하고 Windows 11로 본다."
+    },
+    {
+      "id": "X008",
+      "inquiry": "서버 SV-0007 우분투 22.04인데 디스크 사용량이 95%라고 경고가 계속 떠요. 정리 방법 알려주세요.",
+      "gold": {
+        "asset_id": "SV-0007",
+        "os": "Ubuntu 22.04",
+        "symptom": "디스크 사용량 95% 경고가 계속 뜨고 정리 방법을 묻고 있음",
+        "symptom_points": [
+          "디스크 사용량 경고",
+          "정리 방법 문의"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "한글표기"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X009",
+      "inquiry": "자산번호 MN-0412 모니터를 윈도우 11 PC에 연결했는데 해상도가 자꾸 1024x768로 돌아가요.",
+      "gold": {
+        "asset_id": "MN-0412",
+        "os": "Windows 11",
+        "symptom": "해상도가 자꾸 1024x768로 돌아감",
+        "symptom_points": [
+          "해상도 1024x768로 복귀"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X010",
+      "inquiry": "제 노트북(자산번호 NB-2022-0950)은 Windows 10인데 사내 메신저 알림이 소리만 나고 팝업이 안 떠요.",
+      "gold": {
+        "asset_id": "NB-2022-0950",
+        "os": "Windows 10",
+        "symptom": "메신저 알림이 소리만 나고 팝업이 뜨지 않음",
+        "symptom_points": [
+          "알림 소리만",
+          "팝업 안 뜸"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X011",
+      "inquiry": "자산번호 DT-0102, 윈도우 10 데스크탑이 점심 먹고 오면 항상 잠금화면에서 멈춰 있어요.",
+      "gold": {
+        "asset_id": "DT-0102",
+        "os": "Windows 10",
+        "symptom": "점심 후 복귀하면 항상 잠금화면에서 멈춰 있음",
+        "symptom_points": [
+          "잠금화면에서 멈춤"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [
+        "한글표기"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X012",
+      "inquiry": "[NB-2025-0301] macOS Sonoma 14.5에서 Teams 화면 공유 시 상대에게 검은 화면만 보인다고 합니다.",
+      "gold": {
+        "asset_id": "NB-2025-0301",
+        "os": "macOS Sonoma 14.5",
+        "symptom": "Teams 화면 공유 시 상대에게 검은 화면만 보임",
+        "symptom_points": [
+          "Teams 화면 공유",
+          "검은 화면"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [
+        "대괄호표기"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X013",
+      "inquiry": "자산번호 PH-0119 아이폰 iOS 17인데 사내 메일 계정 추가가 계속 실패해요.",
+      "gold": {
+        "asset_id": "PH-0119",
+        "os": "iOS 17",
+        "symptom": "사내 메일 계정 추가가 계속 실패함",
+        "symptom_points": [
+          "메일 계정 추가 실패"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X014",
+      "inquiry": "asset id는 NB-2024-0644이고 OS는 Windows 11입니다. 블루투스 마우스가 자주 끊겨요.",
+      "gold": {
+        "asset_id": "NB-2024-0644",
+        "os": "Windows 11",
+        "symptom": "블루투스 마우스가 자주 끊김",
+        "symptom_points": [
+          "블루투스 마우스 끊김"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [
+        "영문표기"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X015",
+      "inquiry": "NB-2023-0215 / Win11 / 외장 SSD를 꽂으면 인식은 되는데 파일 복사 중 멈춥니다.",
+      "gold": {
+        "asset_id": "NB-2023-0215",
+        "os": "Windows 11",
+        "symptom": "외장 SSD는 인식되지만 파일 복사 중 멈춤",
+        "symptom_points": [
+          "외장 SSD",
+          "복사 중 멈춤"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "약어표기",
+        "슬래시구분"
+      ],
+      "note": "Win11은 Windows 11."
+    },
+    {
+      "id": "X016",
+      "inquiry": "자산번호: DT-0804 (Ubuntu 22.04). 업데이트 후 wifi 어댑터가 사라졌어요.",
+      "gold": {
+        "asset_id": "DT-0804",
+        "os": "Ubuntu 22.04",
+        "symptom": "업데이트 후 wifi 어댑터가 사라짐",
+        "symptom_points": [
+          "업데이트 후",
+          "wifi 어댑터 사라짐"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X017",
+      "inquiry": "저 NB-2025-0059 쓰는데요 윈도우 10이구요, 사내 그룹웨어 첨부파일 업로드가 계속 0%에서 멈춰요.",
+      "gold": {
+        "asset_id": "NB-2025-0059",
+        "os": "Windows 10",
+        "symptom": "그룹웨어 첨부파일 업로드가 0%에서 멈춤",
+        "symptom_points": [
+          "첨부파일 업로드",
+          "0%에서 멈춤"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "구어체"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X018",
+      "inquiry": "자산번호 NB-2024-0333 Windows 11 노트북에서 한글 프로그램이 문서를 열 때마다 '비정상 종료'됩니다. 어제 업데이트 이후부터예요.",
+      "gold": {
+        "asset_id": "NB-2024-0333",
+        "os": "Windows 11",
+        "symptom": "어제 업데이트 이후 한글 프로그램이 문서를 열 때마다 비정상 종료됨",
+        "symptom_points": [
+          "한글 프로그램",
+          "비정상 종료"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X019",
+      "inquiry": "맥(MB-0966, macOS Sonoma 14.5)에서 사내 VPN 클라이언트 설치 방법을 알려주세요.",
+      "gold": {
+        "asset_id": "MB-0966",
+        "os": "macOS Sonoma 14.5",
+        "symptom": "사내 VPN 클라이언트 설치 방법을 묻는 요청",
+        "symptom_points": [
+          "VPN 클라이언트 설치 방법 문의"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "요청형"
+      ],
+      "note": "증상 자리에는 요청 내용이 들어간다."
+    },
+    {
+      "id": "X020",
+      "inquiry": "PC 자산번호 DT-0555, 운영체제 Windows 11. 사용자 계정 권한을 관리자로 올려주실 수 있나요?",
+      "gold": {
+        "asset_id": "DT-0555",
+        "os": "Windows 11",
+        "symptom": "사용자 계정을 관리자 권한으로 올려 달라는 요청",
+        "symptom_points": [
+          "관리자 권한 상향 요청"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "요청형"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X021",
+      "inquiry": "NB-2024-0188 노트북 전원을 켜도 화면이 안 들어와요. 팬 소리는 나요.",
+      "gold": {
+        "asset_id": "NB-2024-0188",
+        "os": "없음",
+        "symptom": "전원은 켜지고 팬 소리는 나지만 화면이 나오지 않음",
+        "symptom_points": [
+          "화면 안 나옴",
+          "팬 소리는 남"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X022",
+      "inquiry": "자산번호 MB-0721 맥북에서 슬랙이 자꾸 로그아웃돼요.",
+      "gold": {
+        "asset_id": "MB-0721",
+        "os": "없음",
+        "symptom": "슬랙이 자꾸 로그아웃됨",
+        "symptom_points": [
+          "슬랙 로그아웃 반복"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "장비힌트함정"
+      ],
+      "note": "맥북은 장비 종류이지 OS 표기가 아니다."
+    },
+    {
+      "id": "X023",
+      "inquiry": "DT-0390 데스크탑이 부팅은 되는데 로그인 화면에서 키보드가 안 먹어요.",
+      "gold": {
+        "asset_id": "DT-0390",
+        "os": "없음",
+        "symptom": "로그인 화면에서 키보드 입력이 되지 않음",
+        "symptom_points": [
+          "로그인 화면",
+          "키보드 입력 안 됨"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X024",
+      "inquiry": "PR-0144 프린터 용지 걸림 표시가 안 없어져요.",
+      "gold": {
+        "asset_id": "PR-0144",
+        "os": "없음",
+        "symptom": "프린터 용지 걸림 표시가 사라지지 않음",
+        "symptom_points": [
+          "용지 걸림 표시 지속"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X025",
+      "inquiry": "자산번호 NB-2023-0620 노트북 배터리 팽창 같은데 교체해 주세요.",
+      "gold": {
+        "asset_id": "NB-2023-0620",
+        "os": "없음",
+        "symptom": "배터리가 부푼 것 같아 교체를 요청함",
+        "symptom_points": [
+          "배터리 팽창",
+          "교체 요청"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X026",
+      "inquiry": "NB-2025-0204 쓰는 사람인데요, 어제부터 인터넷은 되는데 사내 시스템만 접속이 안 됩니다.",
+      "gold": {
+        "asset_id": "NB-2025-0204",
+        "os": "없음",
+        "symptom": "어제부터 인터넷은 되지만 사내 시스템만 접속이 안 됨",
+        "symptom_points": [
+          "인터넷은 정상",
+          "사내 시스템 접속 불가"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "구어체"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X027",
+      "inquiry": "자산번호 SV-0019 서버 CPU 사용률이 계속 100%예요.",
+      "gold": {
+        "asset_id": "SV-0019",
+        "os": "없음",
+        "symptom": "서버 CPU 사용률이 계속 100%임",
+        "symptom_points": [
+          "CPU 사용률 100%"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X028",
+      "inquiry": "MN-0230 모니터 한쪽 모서리에 줄이 생겼어요.",
+      "gold": {
+        "asset_id": "MN-0230",
+        "os": "없음",
+        "symptom": "모니터 한쪽 모서리에 줄이 생김",
+        "symptom_points": [
+          "모서리에 줄"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X029",
+      "inquiry": "자산번호 TB-0041 태블릿 화면 터치가 반응이 느립니다.",
+      "gold": {
+        "asset_id": "TB-0041",
+        "os": "없음",
+        "symptom": "태블릿 화면 터치 반응이 느림",
+        "symptom_points": [
+          "터치 반응 느림"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X030",
+      "inquiry": "NB-2024-0912 노트북 팬 소음이 너무 커요. 점검 부탁드려요.",
+      "gold": {
+        "asset_id": "NB-2024-0912",
+        "os": "없음",
+        "symptom": "팬 소음이 너무 커서 점검을 요청함",
+        "symptom_points": [
+          "팬 소음",
+          "점검 요청"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X031",
+      "inquiry": "자산번호 DT-0777 PC 모니터 케이블이 헐거워진 것 같아요.",
+      "gold": {
+        "asset_id": "DT-0777",
+        "os": "없음",
+        "symptom": "모니터 케이블이 헐거워진 것 같음",
+        "symptom_points": [
+          "모니터 케이블 헐거움"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X032",
+      "inquiry": "NB-2025-0147 노트북 키보드 'ㅁ' 키가 안 눌려요.",
+      "gold": {
+        "asset_id": "NB-2025-0147",
+        "os": "없음",
+        "symptom": "키보드의 ㅁ 키가 눌리지 않음",
+        "symptom_points": [
+          "ㅁ 키 안 눌림"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X033",
+      "inquiry": "윈도우 11 쓰는데 크롬에서 사내 포털 로그인이 계속 새로고침만 돼요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "Windows 11",
+        "symptom": "크롬에서 사내 포털 로그인이 새로고침만 반복됨",
+        "symptom_points": [
+          "크롬",
+          "포털 로그인 새로고침 반복"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "한글표기"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X034",
+      "inquiry": "Ubuntu 22.04 노트북에서 한글 입력기가 갑자기 안 돼요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "Ubuntu 22.04",
+        "symptom": "한글 입력기가 갑자기 동작하지 않음",
+        "symptom_points": [
+          "한글 입력 안 됨"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X035",
+      "inquiry": "macOS Sonoma 14.5인데 사내 인증서 설치는 어떻게 하나요?",
+      "gold": {
+        "asset_id": "없음",
+        "os": "macOS Sonoma 14.5",
+        "symptom": "사내 인증서 설치 방법을 묻는 질문",
+        "symptom_points": [
+          "사내 인증서 설치 방법 문의"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [
+        "요청형"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X036",
+      "inquiry": "윈도우 10인데 업데이트가 계속 실패 코드 0x80070005로 끝나요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "Windows 10",
+        "symptom": "윈도우 업데이트가 오류 코드 0x80070005로 계속 실패함",
+        "symptom_points": [
+          "업데이트 실패",
+          "0x80070005"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "오류코드"
+      ],
+      "note": "오류 코드는 자산번호가 아니다."
+    },
+    {
+      "id": "X037",
+      "inquiry": "저는 맥OS 쓰고 있고요, 프린터 추가가 안 돼요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "macOS",
+        "symptom": "프린터 추가가 되지 않음",
+        "symptom_points": [
+          "프린터 추가 실패"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "한글표기",
+        "버전없음"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X038",
+      "inquiry": "Win11에서 팀즈 카메라가 안 켜져요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "Windows 11",
+        "symptom": "팀즈에서 카메라가 켜지지 않음",
+        "symptom_points": [
+          "팀즈 카메라 안 켜짐"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "약어표기"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X039",
+      "inquiry": "리눅스(우분투) 22.04 환경에서 사내 VPN 접속 방법이 궁금합니다.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "Ubuntu 22.04",
+        "symptom": "사내 VPN 접속 방법을 묻는 질문",
+        "symptom_points": [
+          "VPN 접속 방법 문의"
+        ]
+      },
+      "difficulty": "hard",
+      "tags": [
+        "표기혼재"
+      ],
+      "note": "리눅스(우분투) 22.04는 Ubuntu 22.04로 본다."
+    },
+    {
+      "id": "X040",
+      "inquiry": "안드로이드 14 폰에서 사내 메신저 푸시가 안 와요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "Android 14",
+        "symptom": "사내 메신저 푸시 알림이 오지 않음",
+        "symptom_points": [
+          "푸시 알림 안 옴"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [
+        "한글표기"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X041",
+      "inquiry": "Windows 11 Pro 쓰는데 원격 데스크톱 접속이 거부돼요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "Windows 11",
+        "symptom": "원격 데스크톱 접속이 거부됨",
+        "symptom_points": [
+          "원격 데스크톱 접속 거부"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X042",
+      "inquiry": "iOS 17 아이폰에서 사내 와이파이 인증 화면이 안 떠요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "iOS 17",
+        "symptom": "사내 와이파이 인증 화면이 뜨지 않음",
+        "symptom_points": [
+          "와이파이 인증 화면 안 뜸"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X043",
+      "inquiry": "맥북 macOS Ventura 13.6 에서 외장모니터가 인식이 안 돼요",
+      "gold": {
+        "asset_id": "없음",
+        "os": "macOS Ventura 13.6",
+        "symptom": "외장 모니터가 인식되지 않음",
+        "symptom_points": [
+          "외장 모니터 인식 안 됨"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X044",
+      "inquiry": "윈도우즈 10 쓰고 있어요. 엑셀이 느려서 답답해요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "Windows 10",
+        "symptom": "엑셀이 느림",
+        "symptom_points": [
+          "엑셀 느림"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [
+        "한글표기"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X045",
+      "inquiry": "프린터가 어제부터 인쇄를 못 해요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "프린터가 어제부터 인쇄를 하지 못함",
+        "symptom_points": [
+          "프린터 인쇄 불가"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X046",
+      "inquiry": "회의실 화상회의 장비에서 소리가 울려요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "화상회의 장비에서 소리가 울림",
+        "symptom_points": [
+          "소리 울림(에코)"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X047",
+      "inquiry": "맥북이 갑자기 꺼져요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "맥북이 갑자기 꺼짐",
+        "symptom_points": [
+          "갑자기 꺼짐"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "장비힌트함정"
+      ],
+      "note": "맥북은 OS가 아니다."
+    },
+    {
+      "id": "X048",
+      "inquiry": "아이폰으로 메일 설정을 하고 싶어요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "아이폰에 메일을 설정하고 싶다는 요청",
+        "symptom_points": [
+          "메일 설정 요청"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "장비힌트함정"
+      ],
+      "note": "아이폰이어도 OS 이름이 적히지 않았으면 없음."
+    },
+    {
+      "id": "X049",
+      "inquiry": "갤럭시 탭에서 사내 앱이 안 열려요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "갤럭시 탭에서 사내 앱이 열리지 않음",
+        "symptom_points": [
+          "사내 앱 안 열림"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "장비힌트함정"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X050",
+      "inquiry": "노트북 화면이 가끔 깜빡여요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "노트북 화면이 가끔 깜빡임",
+        "symptom_points": [
+          "화면 깜빡임"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X051",
+      "inquiry": "와이파이가 자꾸 끊겨요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "와이파이가 자꾸 끊김",
+        "symptom_points": [
+          "와이파이 끊김"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X052",
+      "inquiry": "VPN 접속 방법 좀 알려주세요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "VPN 접속 방법을 묻는 요청",
+        "symptom_points": [
+          "VPN 접속 방법 문의"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X053",
+      "inquiry": "공유 폴더에 파일을 올렸는데 다른 사람이 못 봐요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "공유 폴더에 올린 파일을 다른 사람이 볼 수 없음",
+        "symptom_points": [
+          "공유 폴더",
+          "다른 사람이 못 봄"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X054",
+      "inquiry": "사내 메일이 몇 시간째 안 들어와요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "사내 메일이 몇 시간째 수신되지 않음",
+        "symptom_points": [
+          "메일 수신 안 됨"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X055",
+      "inquiry": "회사 PC 소리가 안 나요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "PC에서 소리가 나지 않음",
+        "symptom_points": [
+          "소리 안 남"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X056",
+      "inquiry": "새로 산 마우스가 인식이 안 돼요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "새 마우스가 인식되지 않음",
+        "symptom_points": [
+          "마우스 인식 안 됨"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X057",
+      "inquiry": "원격 근무용 장비를 신청하고 싶어요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "원격 근무용 장비를 신청하고 싶다는 요청",
+        "symptom_points": [
+          "원격 근무 장비 신청"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [
+        "요청형"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X058",
+      "inquiry": "그룹웨어가 너무 느려요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "그룹웨어가 너무 느림",
+        "symptom_points": [
+          "그룹웨어 느림"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X059",
+      "inquiry": "티켓 INC-2026-1115 건이 아직 처리 중인가요? 프린터가 계속 안 돼요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "프린터가 계속 안 되고, 접수한 티켓의 처리 상태를 묻고 있음",
+        "symptom_points": [
+          "프린터 문제",
+          "티켓 처리 상태 문의"
+        ]
+      },
+      "difficulty": "hard",
+      "tags": [
+        "코드함정"
+      ],
+      "note": "INC-는 장애 티켓 번호이지 자산번호가 아니다."
+    },
+    {
+      "id": "X060",
+      "inquiry": "오류 코드 ERR-4021이 뜨면서 로그인이 안 돼요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "오류 코드 ERR-4021과 함께 로그인이 되지 않음",
+        "symptom_points": [
+          "오류 코드 ERR-4021",
+          "로그인 불가"
+        ]
+      },
+      "difficulty": "hard",
+      "tags": [
+        "코드함정"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X061",
+      "inquiry": "회의실 B-203 프로젝터가 안 켜져요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "회의실 B-203의 프로젝터가 켜지지 않음",
+        "symptom_points": [
+          "프로젝터 안 켜짐"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "코드함정"
+      ],
+      "note": "회의실 호수는 자산번호가 아니다."
+    },
+    {
+      "id": "X062",
+      "inquiry": "VPN 클라이언트 버전 22.4.1에서 연결이 안 돼요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "VPN 클라이언트(22.4.1) 연결이 되지 않음",
+        "symptom_points": [
+          "VPN 연결 불가"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "코드함정"
+      ],
+      "note": "소프트웨어 버전은 자산번호가 아니다."
+    },
+    {
+      "id": "X063",
+      "inquiry": "ThinkPad T14 모델인데 키보드가 안 먹어요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "키보드가 입력되지 않음",
+        "symptom_points": [
+          "키보드 입력 안 됨"
+        ]
+      },
+      "difficulty": "hard",
+      "tags": [
+        "코드함정"
+      ],
+      "note": "모델명 T14는 자산번호가 아니다."
+    },
+    {
+      "id": "X064",
+      "inquiry": "프로젝트 PJ-2026-07 관련 서버 접속 권한이 필요합니다.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "프로젝트 PJ-2026-07 관련 서버 접속 권한이 필요하다는 요청",
+        "symptom_points": [
+          "서버 접속 권한 요청"
+        ]
+      },
+      "difficulty": "hard",
+      "tags": [
+        "코드함정"
+      ],
+      "note": "프로젝트 코드는 자산번호가 아니다."
+    },
+    {
+      "id": "X065",
+      "inquiry": "결재 문서번호 DOC-2026-0831이 열리지 않아요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "결재 문서가 열리지 않음",
+        "symptom_points": [
+          "문서 열리지 않음"
+        ]
+      },
+      "difficulty": "hard",
+      "tags": [
+        "코드함정"
+      ],
+      "note": "문서번호는 자산번호가 아니다."
+    },
+    {
+      "id": "X066",
+      "inquiry": "2026-11-18 오후부터 메일이 안 보내져요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "2026-11-18 오후부터 메일이 발송되지 않음",
+        "symptom_points": [
+          "메일 발송 안 됨"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "날짜함정"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X067",
+      "inquiry": "SSID CORP-5G에 연결이 안 돼요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "SSID CORP-5G 와이파이에 연결되지 않음",
+        "symptom_points": [
+          "와이파이 연결 불가"
+        ]
+      },
+      "difficulty": "hard",
+      "tags": [
+        "코드함정"
+      ],
+      "note": "네트워크 이름은 자산번호가 아니다."
+    },
+    {
+      "id": "X068",
+      "inquiry": "주문번호 PO-2026-0412 장비가 아직 안 왔어요. 언제 오나요?",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "주문한 장비가 아직 도착하지 않아 도착 시점을 묻고 있음",
+        "symptom_points": [
+          "장비 미도착",
+          "도착 시점 문의"
+        ]
+      },
+      "difficulty": "hard",
+      "tags": [
+        "코드함정"
+      ],
+      "note": "구매 주문번호는 자산번호가 아니다."
+    },
+    {
+      "id": "X069",
+      "inquiry": "교체 전 노트북은 NB-2022-0101이고, 지금 쓰는 NB-2025-0222에서 화면이 깜빡여요.",
+      "gold": {
+        "asset_id": "NB-2025-0222",
+        "os": "없음",
+        "symptom": "현재 쓰는 노트북 화면이 깜빡임",
+        "symptom_points": [
+          "화면 깜빡임"
+        ]
+      },
+      "difficulty": "hard",
+      "tags": [
+        "다중ID"
+      ],
+      "note": "문제가 있는 장비는 지금 쓰는 NB-2025-0222."
+    },
+    {
+      "id": "X070",
+      "inquiry": "NB-2024-0300 노트북이 고장나서 NB-2024-0301로 대여 받았는데, 이 대여 노트북은 와이파이가 안 잡혀요.",
+      "gold": {
+        "asset_id": "NB-2024-0301",
+        "os": "없음",
+        "symptom": "대여받은 노트북이 와이파이를 잡지 못함",
+        "symptom_points": [
+          "와이파이 안 잡힘"
+        ]
+      },
+      "difficulty": "hard",
+      "tags": [
+        "다중ID"
+      ],
+      "note": "문제 장비는 대여받은 NB-2024-0301."
+    },
+    {
+      "id": "X071",
+      "inquiry": "DT-0450은 정상이고 DT-0451만 부팅이 안 돼요.",
+      "gold": {
+        "asset_id": "DT-0451",
+        "os": "없음",
+        "symptom": "DT-0451이 부팅되지 않음",
+        "symptom_points": [
+          "부팅 안 됨"
+        ]
+      },
+      "difficulty": "hard",
+      "tags": [
+        "다중ID"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X072",
+      "inquiry": "작년에 쓰던 MB-0100은 반납했고 새 MB-0820에서 팀즈가 안 열려요.",
+      "gold": {
+        "asset_id": "MB-0820",
+        "os": "없음",
+        "symptom": "새 맥북에서 팀즈가 열리지 않음",
+        "symptom_points": [
+          "팀즈 안 열림"
+        ]
+      },
+      "difficulty": "hard",
+      "tags": [
+        "다중ID"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X073",
+      "inquiry": "자산번호는 NB-2024-0188이고 윈도우 11 쓰고 있어요.",
+      "gold": {
+        "asset_id": "NB-2024-0188",
+        "os": "Windows 11",
+        "symptom": "없음",
+        "symptom_points": []
+      },
+      "difficulty": "medium",
+      "tags": [
+        "증상없음",
+        "한글표기"
+      ],
+      "note": "장비 정보만 있고 문제나 요청이 없다."
+    },
+    {
+      "id": "X074",
+      "inquiry": "DT-0615, Ubuntu 22.04입니다.",
+      "gold": {
+        "asset_id": "DT-0615",
+        "os": "Ubuntu 22.04",
+        "symptom": "없음",
+        "symptom_points": []
+      },
+      "difficulty": "medium",
+      "tags": [
+        "증상없음"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X075",
+      "inquiry": "NB-2025-0112 / Windows 10",
+      "gold": {
+        "asset_id": "NB-2025-0112",
+        "os": "Windows 10",
+        "symptom": "없음",
+        "symptom_points": []
+      },
+      "difficulty": "medium",
+      "tags": [
+        "증상없음",
+        "슬래시구분"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X076",
+      "inquiry": "자산번호 MB-0872 macOS Sonoma 14.5입니다. 확인 부탁드립니다.",
+      "gold": {
+        "asset_id": "MB-0872",
+        "os": "macOS Sonoma 14.5",
+        "symptom": "없음",
+        "symptom_points": []
+      },
+      "difficulty": "hard",
+      "tags": [
+        "증상없음",
+        "모호요청"
+      ],
+      "note": "'확인 부탁'만 있고 무엇을 확인할지 없다."
+    },
+    {
+      "id": "X077",
+      "inquiry": "PR-0058 프린터예요.",
+      "gold": {
+        "asset_id": "PR-0058",
+        "os": "없음",
+        "symptom": "없음",
+        "symptom_points": []
+      },
+      "difficulty": "medium",
+      "tags": [
+        "증상없음"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X078",
+      "inquiry": "제 자산번호 알려드려요. NB-2023-0907.",
+      "gold": {
+        "asset_id": "NB-2023-0907",
+        "os": "없음",
+        "symptom": "없음",
+        "symptom_points": []
+      },
+      "difficulty": "medium",
+      "tags": [
+        "증상없음"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X079",
+      "inquiry": "윈도우 11이고 자산번호는 DT-0431이에요.",
+      "gold": {
+        "asset_id": "DT-0431",
+        "os": "Windows 11",
+        "symptom": "없음",
+        "symptom_points": []
+      },
+      "difficulty": "medium",
+      "tags": [
+        "증상없음",
+        "한글표기"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X080",
+      "inquiry": "NB-2022-0310 Windows 10 노트북 사용 중입니다.",
+      "gold": {
+        "asset_id": "NB-2022-0310",
+        "os": "Windows 10",
+        "symptom": "없음",
+        "symptom_points": []
+      },
+      "difficulty": "medium",
+      "tags": [
+        "증상없음"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X081",
+      "inquiry": "안녕하세요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "없음",
+        "symptom_points": []
+      },
+      "difficulty": "easy",
+      "tags": [
+        "정보없음"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X082",
+      "inquiry": "감사합니다. 덕분에 해결됐어요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "없음",
+        "symptom_points": []
+      },
+      "difficulty": "medium",
+      "tags": [
+        "정보없음"
+      ],
+      "note": "현재 문제나 요청이 없다."
+    },
+    {
+      "id": "X083",
+      "inquiry": "문의드립니다.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "없음",
+        "symptom_points": []
+      },
+      "difficulty": "easy",
+      "tags": [
+        "정보없음"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X084",
+      "inquiry": "아까 말씀드린 건 어떻게 됐나요?",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "없음",
+        "symptom_points": []
+      },
+      "difficulty": "hard",
+      "tags": [
+        "정보없음",
+        "문맥의존"
+      ],
+      "note": "앞선 대화가 없어 내용을 알 수 없다."
+    },
+    {
+      "id": "X085",
+      "inquiry": "헬프데스크 운영시간이 어떻게 되나요?",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "헬프데스크 운영 시간을 묻는 질문",
+        "symptom_points": [
+          "운영 시간 문의"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "요청형"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X086",
+      "inquiry": "네.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "없음",
+        "symptom_points": []
+      },
+      "difficulty": "easy",
+      "tags": [
+        "정보없음"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X087",
+      "inquiry": "NB-2025-0059 노트북 보증 기간이 언제까지인지 확인해 주세요.",
+      "gold": {
+        "asset_id": "NB-2025-0059",
+        "os": "없음",
+        "symptom": "노트북 보증 기간 확인 요청",
+        "symptom_points": [
+          "보증 기간 확인 요청"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [
+        "요청형"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X088",
+      "inquiry": "Windows 11용 사내 백신 설치 파일은 어디서 받나요?",
+      "gold": {
+        "asset_id": "없음",
+        "os": "Windows 11",
+        "symptom": "사내 백신 설치 파일을 받을 위치를 묻는 질문",
+        "symptom_points": [
+          "백신 설치 파일 위치 문의"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [
+        "요청형"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X089",
+      "inquiry": "새 입사자 DT-0902 PC에 개발 도구 설치를 부탁드립니다.",
+      "gold": {
+        "asset_id": "DT-0902",
+        "os": "없음",
+        "symptom": "개발 도구 설치 요청",
+        "symptom_points": [
+          "개발 도구 설치 요청"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [
+        "요청형"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X090",
+      "inquiry": "MB-1203 맥북 반납하려고 하는데 어디로 가져가면 되나요?",
+      "gold": {
+        "asset_id": "MB-1203",
+        "os": "없음",
+        "symptom": "맥북 반납 위치를 묻는 질문",
+        "symptom_points": [
+          "반납 위치 문의"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [
+        "요청형",
+        "장비힌트함정"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X091",
+      "inquiry": "저는 macOS Sonoma 14.5를 쓰는데 사내 위키 접근 권한 신청 어떻게 해요?",
+      "gold": {
+        "asset_id": "없음",
+        "os": "macOS Sonoma 14.5",
+        "symptom": "사내 위키 접근 권한 신청 방법을 묻는 질문",
+        "symptom_points": [
+          "위키 접근 권한 신청 방법 문의"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "요청형"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X092",
+      "inquiry": "PR-0210 프린터 토너 교체 요청드립니다.",
+      "gold": {
+        "asset_id": "PR-0210",
+        "os": "없음",
+        "symptom": "프린터 토너 교체 요청",
+        "symptom_points": [
+          "토너 교체 요청"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [
+        "요청형"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X093",
+      "inquiry": "어제 오후 2시쯤 자리에서 일어났다 오니까 제 노트북(자산번호 NB-2024-0555)이 갑자기 재부팅되어 있었고, 그 뒤로 Windows 11 로그인 화면에서 비밀번호를 입력해도 '사용자 이름 또는 암호가 잘못되었습니다'라는 메시지만 나옵니다. 비밀번호는 확실히 맞아요.",
+      "gold": {
+        "asset_id": "NB-2024-0555",
+        "os": "Windows 11",
+        "symptom": "재부팅 이후 로그인 화면에서 맞는 비밀번호를 입력해도 '사용자 이름 또는 암호가 잘못되었습니다' 메시지가 나옴",
+        "symptom_points": [
+          "로그인 불가",
+          "암호가 잘못되었다는 메시지"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "긴서술"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X094",
+      "inquiry": "지난주 금요일부터 회의실에서 화상회의를 하면 상대방 영상이 3~4초씩 끊깁니다. 와이파이 문제인가 싶어서 유선도 써봤는데 똑같아요. 노트북은 윈도우 10이고 자산번호는 NB-2023-0488입니다.",
+      "gold": {
+        "asset_id": "NB-2023-0488",
+        "os": "Windows 10",
+        "symptom": "지난주 금요일부터 화상회의 중 상대 영상이 3~4초씩 끊기며 유선으로 바꿔도 같음",
+        "symptom_points": [
+          "영상 끊김",
+          "유선도 동일"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "긴서술",
+        "한글표기"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X095",
+      "inquiry": "출근하자마자 사내 메일을 켰는데 받은편지함이 비어 있습니다. 어제까지 있던 메일이 전부 사라졌고 웹메일에서도 같은 상태예요. 급하게 확인해야 할 계약서 메일이 있습니다.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "받은편지함의 메일이 모두 사라졌고 웹메일에서도 동일하며 계약서 메일 확인이 급함",
+        "symptom_points": [
+          "받은편지함 메일 사라짐",
+          "웹메일도 동일"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "긴서술"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X096",
+      "inquiry": "회사에서 받은 맥북(MB-0820)을 집에서 쓰다가 커피를 쏟았어요. 전원은 켜지는데 키보드 몇 개가 안 눌립니다. macOS Sonoma 14.5입니다. 수리 접수하려면 어떻게 해야 하나요?",
+      "gold": {
+        "asset_id": "MB-0820",
+        "os": "macOS Sonoma 14.5",
+        "symptom": "커피를 쏟은 뒤 키보드 일부 키가 안 눌리며 수리 접수 방법을 묻고 있음",
+        "symptom_points": [
+          "커피 쏟음 또는 키 안 눌림",
+          "수리 접수 방법 문의"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "긴서술"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X097",
+      "inquiry": "신규 프로젝트 때문에 개발 서버에 접속해야 하는데, 지난주 신청한 접근 권한이 아직 승인이 안 됐고 일정이 급합니다. 서버 접근 승인 처리 상태를 알고 싶어요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "지난주 신청한 개발 서버 접근 권한의 승인 처리 상태를 묻고 있음",
+        "symptom_points": [
+          "접근 권한 승인 상태 문의"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "긴서술"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X098",
+      "inquiry": "프린터(PR-0144)에서 인쇄하면 한글 파일만 글자가 깨져요. 엑셀, PDF는 정상이고 PC는 윈도우 11입니다.",
+      "gold": {
+        "asset_id": "PR-0144",
+        "os": "Windows 11",
+        "symptom": "한글 파일만 인쇄할 때 글자가 깨지고 엑셀과 PDF는 정상임",
+        "symptom_points": [
+          "한글 파일만 글자 깨짐"
+        ]
+      },
+      "difficulty": "medium",
+      "tags": [
+        "긴서술"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X099",
+      "inquiry": "사내 AI 챗봇이 어제부터 답변하다 중간에 멈춰요.",
+      "gold": {
+        "asset_id": "없음",
+        "os": "없음",
+        "symptom": "사내 AI 챗봇이 어제부터 답변 도중 멈춤",
+        "symptom_points": [
+          "AI 챗봇 답변 도중 멈춤"
+        ]
+      },
+      "difficulty": "easy",
+      "tags": [],
+      "note": ""
+    },
+    {
+      "id": "X100",
+      "inquiry": "노트북 두 대를 쓰고 있는데 업무용은 NB-2025-0147(Windows 11)이고 개인용은 회사와 무관해요. 업무용에서 사내 VPN이 계속 끊깁니다.",
+      "gold": {
+        "asset_id": "NB-2025-0147",
+        "os": "Windows 11",
+        "symptom": "업무용 노트북에서 사내 VPN이 계속 끊김",
+        "symptom_points": [
+          "VPN 끊김"
+        ]
+      },
+      "difficulty": "hard",
+      "tags": [
+        "긴서술",
+        "다중장비"
+      ],
+      "note": "개인용은 회사 장비가 아니므로 업무용 ID만 해당한다."
+    }
+  ]
+}
